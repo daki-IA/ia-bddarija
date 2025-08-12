@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IA بالدارجة - منصة تعليمية</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap');
+
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Cairo', sans-serif, sans-serif;
+    background: linear-gradient(135deg, #f6f0e4, #d8c8b8);
+    color: #4b3b2b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* خلفية زخارف مغربية شفافة */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/82/Moroccan_Zellij_pattern.svg');
+    background-repeat: repeat;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  header {
+    background: #a67441;
+    color: #fff9f0;
+    padding: 1.2rem 2rem;
+    box-shadow: 0 4px 8px rgba(166, 116, 65, 0.7);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 2px #553a11;
+  }
+  nav a {
+    color: #f0d8b3;
+    text-decoration: none;
+    margin-left: 1.6rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  nav a:hover {
+    color: #fff9f0;
+    text-shadow: 0 0 5px #fff9f0;
+  }
+
+  main {
+    max-width: 960px;
+    margin: 3rem auto 2rem auto;
+    padding: 0 1.2rem;
+    flex-grow: 1;
+  }
+
+  section {
+    background: #fff9f0dd;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(166, 116, 65, 0.15);
+    padding: 2rem 2.4rem;
+    margin-bottom: 3rem;
+    transition: transform 0.3s ease;
+  }
+  section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(166, 116, 65, 0.3);
+  }
+  section h2 {
+    font-weight: 700;
+    margin-bottom: 1.4rem;
+    border-bottom: 3px solid #a67441;
+    padding-bottom: 0.5rem;
+    font-size: 1.8rem;
+  }
+  p, li {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: #5a4531;
+  }
+  ul {
+    list-style: none;
+    padding-right: 1rem;
+  }
+  ul li {
+    margin-bottom: 1.2rem;
+  }
+  a.app-link {
+    font-weight: 700;
+    color: #a67441;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a.app-link:hover {
+    color: #7a4c0f;
+    text-decoration: underline;
+  }
+
+  /* فيديو كورس */
+  video {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 15px rgba(166, 116, 65, 0.3);
+  }
+
+  /* الاختبار */
+  #quiz p {
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  #quiz label {
+    cursor: pointer;
+    display: block;
+    padding: 0.5rem 0;
+  }
+  #quiz button {
+    margin-top: 1rem;
+    background: #a67441;
+    border: none;
+    color: #fff9f0;
+    font-weight: 700;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(166, 116, 65, 0.5);
+    transition: background 0.3s ease;
+  }
+  #quiz button:hover {
+    background: #7a4c0f;
+  }
+  #quiz .result {
+    margin-top: 1rem;
+    font-weight: 700;
+  }
+
+  /* تسجيل دخول */
+  #login input {
+    width: 100%;
+    padding: 0.7rem;
+    margin-bottom: 1rem;
+    border: 2px solid #a67441;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #5a4531;
+    font-weight: 600;
+    transition: border-color 0.3s ease;
+  }
+  #login input:focus {
+    outline: none;
+    border-color: #7a4c0f;
+  }
+  #login button {
+    width: 100%;
+    background: #a67441;
+    border: none;
+    color: #fff9f0;
+    font-weight: 700;
+    padding: 0.7rem;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(166, 116, 65, 0.5);
+    transition: background 0.3s ease;
+  }
+  #login button:hover {
+    background: #7a4c0f;
+  }
+  #login p#loginMsg {
+    margin-top: 1rem;
+    font-weight: 700;
+  }
+
+  /* إعلانات */
+  #ads {
+    background: #f2e7c4;
+    border: 2px dashed #a67441;
+    border-radius: 16px;
+    padding: 1.8rem 2rem;
+    text-align: center;
+    font-weight: 700;
+    color: #7a4c0f;
+    box-shadow: inset 0 0 12px #fdf1d3;
+  }
+
+  /* فوتر */
+  footer {
+    background: #a67441;
+    color: #fff9f0;
+    text-align: center;
+    padding: 1.2rem 0;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 -3px 6px rgba(166, 116, 65, 0.6);
+  }
+
+  /* متجاوب */
+  @media (max-width: 720px) {
+    main {
+      margin: 1.5rem 1rem 2rem 1rem;
+      padding: 0;
+    }
+    section {
+      padding: 1.5rem 1.2rem;
+    }
+    header h1 {
+      font-size: 1.6rem;
+    }
+    nav a {
+      font-size: 1rem;
+      margin-left: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>IA بالدارجة</h1>
+  <nav>
+    <a href="#intro">تعريف IA</a>
+    <a href="#apps">تطبيقات</a>
+    <a href="#course">كورسات</a>
+    <a href="#login">تسجيل</a>
+    <a href="#ads">إعلانات</a>
+  </nav>
+</header>
+<main>
+  <section id="intro" aria-label="تعريف الذكاء الاصطناعي">
+    <h2>شنو هو الذكاء الاصطناعي؟</h2>
+    <p>
+      الذكاء الاصطناعي (IA) هو ميدان ديال التكنولوجيا كيخلي الحواسيب والبرامج يحاكو التفكير ديال الإنسان ويتعلمو من البيانات باش يحلو مشاكل معقدة بطرق ذكية.
+      الهدف ديالو هو تطوير آلات ذكية تعاون البشر فالحياة اليومية والخدمات.
+    </p>
+  </section>
+
+  <section id="apps" aria-label="تطبيقات الذكاء الاصطناعي">
+    <h2>تطبيقات IA اللي كتقدر تستعملها</h2>
+    <ul>
+      <li><a class="app-link" href="https://chat.openai.com" target="_blank" rel="noopener noreferrer">ChatGPT - دردشة ذكية</a></li>
+      <li><a class="app-link" href="https://midjourney.com" target="_blank" rel="noopener noreferrer">Midjourney - توليد الصور</a></li>
+      <li><a class="app-link" href="https://www.deepl.com" target="_blank" rel="noopener noreferrer">DeepL - ترجمة دقيقة</a></li>
+      <li><a class="app-link" href="https://runwayml.com" target="_blank" rel="noopener noreferrer">RunwayML - تحرير الفيديو بالذكاء الاصطناعي</a></li>
+      <li><a class="app-link" href="https://gradio.app" target="_blank" rel="noopener noreferrer">Gradio - بناء تطبيقات IA بسهولة</a></li>
+    </ul>
+  </section>
+
+  <section id="course" aria-label="كورسات تعلم الذكاء الاصطناعي بالدارجة">
+    <h2>كورسات تفاعلية بالدارجة</h2>
+    <video controls preload="metadata" poster="https://cdn.pixabay.com/photo/2016/11/29/03/53/computer-1869230_1280.jpg" aria-label="فيديو تعليمي عن الذكاء الاصطناعي">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+      المتصفح ديالك ما كيدعمش تشغيل الفيديو.
+    </video>
+
+    <div id="quiz" aria-live="polite" aria-atomic="true">
+      <p>سؤال: شنو هي خاصية التعلم ديال الذكاء الاصطناعي؟</p>
+      <label><input type="radio" name="answer" value="wrong" /> كيكرر نفس الخدمة بلا تغيير</label>
+      <label><input type="radio" name="answer" value="correct" /> كيستافد من البيانات ويتعلم</label>
+      <label><input type="radio" name="answer" value="wrong" /> مجرد أوامر ثابتة</label>
+      <button id="checkAnswer">تأكد من الجواب</button>
+      <p class="result" id="resultText" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="login" aria-label="تسجيل الدخول">
+    <h2>تسجيل الدخول (تجريبي)</h2>
+    <form id="loginForm" onsubmit="return false;" aria-describedby="loginMsg">
+      <input type="text" id="username" name="username" placeholder="اسم المستخدم" aria-required="true" />
+      <input type="password" id="password" name="password" placeholder="كلمة السر" aria-required="true" />
+      <button type="submit">دخول</button>
+      <p id="loginMsg" role="alert" aria-live="assertive"></p>
+    </form>
+  </section>
+
+  <section id="ads" aria-label="إعلانات">
+    <h2>إعلانات مهمة</h2>
+    <p>
+      بغيت تزيد مشروعك؟ إعلان هنا هو الخيار الأمثل! تواصل معنا وخلّي مشروعك يشهر وسط جمهور مهتم بالذكاء الاصطناعي والتقنيات الحديثة.
+    </p>
+  </section>
+</main>
+
+<footer>
+  جميع الحقوق محفوظة © IA بالدارجة 2025
+</footer>
+
+<script>
+  // اختبار بسيط
+  const checkBtn = document.getElementById('checkAnswer');
+  const resultText = document.getElementById('resultText');
+  checkBtn.addEventListener('click', () => {
+    const radios = document.querySelectorAll('#quiz input[type="radio"]');
+    let selected = null;
+    radios.forEach(r => { if (r.checked) selected = r.value; });
+    if (!selected) {
+      resultText.textContent = 'خاصك تختار جواب!';
+      return;
+    }
+    if (selected === 'correct') {
+      resultText.textContent = 'مزيان! هاد الجواب صحيح.';
+    } else {
+      resultText.textContent = 'خطأ، جرب مرة أخرى.';
+    }
+  });
+
+  // تسجيل دخول تجريبي
+  const loginForm = document.getElementById('loginForm');
+  const loginMsg = document.getElementById('loginMsg');
+  loginForm.addEventListener('submit', () => {
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    if (user === '' || pass === '') {
+      loginMsg.textContent = 'المرجو تعمير جميع الحقول.';
+      return;
+    }
+    loginMsg.textContent = `مرحبا بك، ${user}! (تسجيل تجريبي فقط)`;
+    loginForm.reset();
+  });
+</script>
+</body>
+</html>
